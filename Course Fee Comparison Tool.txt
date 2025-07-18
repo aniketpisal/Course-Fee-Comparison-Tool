@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Fee Comparison Tool - Pune</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: #f4f6f8;
+    }
+    h2 {
+      color: #333;
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
+    .result {
+      background: #e6ffed;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      display: none;
+    }
+    .highlight {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Course Fee Comparison – Pune</h2>
+
+  <p>Select a course to compare our fee vs average Pune fee:</p>
+
+  <select id="courseSelect">
+    <option value="" disabled selected>-- Choose a course --</option>
+    <option value="java">Full Stack Java</option>
+    <option value="python">Full Stack Python</option>
+    <option value="datasci">Data Science with AI & ML</option>
+    <option value="devops">AWS and DevOps</option>
+    <option value="analytics">Data Analytics</option>
+  </select>
+
+  <button onclick="compareFees()">Compare Fees</button>
+
+  <div class="result" id="resultBox"></div>
+
+  <script>
+    const courseData = {
+      java: {
+        name: "Full Stack Java",
+        avgFee: 55000,
+        ourFee: 34999
+      },
+      python: {
+        name: "Full Stack Python",
+        avgFee: 50000,
+        ourFee: 33999
+      },
+      datasci: {
+        name: "Data Science with AI & ML",
+        avgFee: 60000,
+        ourFee: 39999
+      },
+      devops: {
+        name: "AWS and DevOps",
+        avgFee: 58000,
+        ourFee: 37999
+      },
+      analytics: {
+        name: "Data Analytics",
+        avgFee: 52000,
+        ourFee: 32999
+      }
+    };
+
+    function compareFees() {
+      const selected = document.getElementById("courseSelect").value;
+      const resultBox = document.getElementById("resultBox");
+
+      if (!selected) {
+        resultBox.style.display = "none";
+        return;
+      }
+
+      const course = courseData[selected];
+      const savings = course.avgFee - course.ourFee;
+
+      resultBox.innerHTML = `
+        <h3>${course.name}</h3>
+        <p><strong>Average Fee in Pune:</strong> ₹${course.avgFee.toLocaleString()}</p>
+        <p><strong>Our Course Fee:</strong> ₹${course.ourFee.toLocaleString()}</p>
+        <p class="highlight">You Save ₹${savings.toLocaleString()}!</p>
+        <p><a href="/enroll-now" target="_blank">👉 Enroll Now & Save</a></p>
+      `;
+      resultBox.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
